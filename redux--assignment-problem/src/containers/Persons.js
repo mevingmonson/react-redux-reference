@@ -5,19 +5,10 @@ import AddPerson from '../components/AddPerson/AddPerson';
 import { connect } from 'react-redux';
 
 class Persons extends Component {
-
-    addPerson = () => {
-        const newPerson = {
-            id: Math.random(), // not really unique but good enough here!
-            name: 'Mevin',
-            age: Math.floor(Math.random() * 40)
-        }
-        this.props.personAddedHandler(newPerson)
-    }
     render() {
         return (
             <div>
-                <AddPerson personAdded={this.addPerson} />
+                <AddPerson personAdded={this.props.personAddedHandler} />
                 {this.props.persons.map(person => (
                     <Person
                         key={person.id}
@@ -38,7 +29,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatcherToProps = dispatch => {
     return {
-        personAddedHandler: (newPerson) => dispatch({ type: 'personAdded', newPerson }),
+        personAddedHandler: (name, age) => dispatch({ type: 'personAdded', personData: { name, age } }),
         personDeletedHandler: (id) => dispatch({ type: 'personDeleted', id })
     }
 }

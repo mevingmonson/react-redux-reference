@@ -6,9 +6,14 @@ const initialState = {
 
 const Reducer = (state = initialState, action) => {
     if (action.type === 'personAdded') {
+        const newPerson = {
+            id: Math.random(),
+            name: action.personData.name,
+            age: action.personData.age
+        }
         return {
             ...state,
-            persons: state.persons.concat(action.newPerson)
+            persons: state.persons.concat(newPerson)
         }
     }
     if (action.type === 'personDeleted') {
